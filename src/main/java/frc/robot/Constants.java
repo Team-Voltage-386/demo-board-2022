@@ -42,8 +42,8 @@ public final class Constants {
     }
 
     // Pneumatics constants
-    public static final int kForwardChannel = 0; // PCM
-    public static final int kReverseChannel = 1; // PCM
+    public static final int kForwardChannel = 2; // PCM
+    public static final int kReverseChannel = 3; // PCM
     public static final DoubleSolenoid.Value kPistonOut = DoubleSolenoid.Value.kForward;
     public static final DoubleSolenoid.Value kPistonIn = DoubleSolenoid.Value.kReverse;
 }

@@ -21,7 +21,7 @@ public class PneumaticsSubsystem extends SubsystemBase {
   // .getEntry();
 
   private final DoubleSolenoid sol = new DoubleSolenoid(
-      PneumaticsModuleType.CTREPCM,
+      PneumaticsModuleType.REVPH,
       Constants.kForwardChannel,
       Constants.kReverseChannel);
 

@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.extendPiston;
 import frc.robot.commands.retractPiston;
@@ -27,11 +28,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final PneumaticsSubsystem pneumaticsSubsystem = new PneumaticsSubsystem();
-  // private final ExampleCommand m_autoCommand = new
-  // ExampleCommand(m_exampleSubsystem);
 
   // public static Joystick controller;
-  public static XboxController controller;
+  // public static XboxController controller;
+  public static final Joystick controller = new Joystick(0);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -40,7 +40,11 @@ public class RobotContainer {
     // Configure the button bindings
     // controller = new Joystick(0);
 
-    controller = new XboxController(0);
+    // controller = new XboxController(0);
+
+    SmartDashboard.putData(pneumaticsSubsystem);
+    SmartDashboard.putString("test", "testing value");
+
     configureButtonBindings();
   }
 
@@ -62,10 +66,6 @@ public class RobotContainer {
 
     Bbutton.whenPressed(new extendPiston(pneumaticsSubsystem));
     Bbutton.whenReleased(new retractPiston(pneumaticsSubsystem));
-    // r1.whenPressed(new PrepareToPickup(m_claw, m_wrist, m_elevator));
-    // r2.whenPressed(new Pickup(m_claw, m_wrist, m_elevator));
-    // l1.whenPressed(new Place(m_claw, m_wrist, m_elevator));
-    // l2.whenPressed(new Autonomous(m_drivetrain, m_claw, m_wrist, m_elevator));
   }
 
   /**
