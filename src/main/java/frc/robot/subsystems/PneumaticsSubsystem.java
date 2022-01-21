@@ -16,17 +16,6 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 public class PneumaticsSubsystem extends SubsystemBase {
 
-  // Create ball pickup solenoid widgets
-  // private NetworkTableEntry ballPickupWidget = Shuffleboard.("Intake Deployed",
-  // false).withSize(2, 1).withPosition(2, 4)
-  // .getEntry();
-
-  // Creates a Shuffleboard tab for the pneumatics subsystem
-  private ShuffleboardTab tab = Shuffleboard.getTab("Pneumatics");
-
-  // Create sensor widgets
-  private NetworkTableEntry PressureWidget = tab.add("Pressure", false).withPosition(7, 3).withSize(2, 1).getEntry();
-
   // create an object so we can read the pressure from the pneumatics hub
   double current_pressure;
   private static final int PH_CAN_ID = 1;
@@ -40,12 +29,9 @@ public class PneumaticsSubsystem extends SubsystemBase {
   /** Creates a new PneumaticsSubsystem. */
   public PneumaticsSubsystem() {
 
-    SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
-    SmartDashboard.setDefaultBoolean("Disable Compressor", false);
-
     // Add number inputs for minimum and maximum pressure
-    SmartDashboard.setDefaultNumber("Minimum Pressure (PSI)", 100.0);
-    SmartDashboard.setDefaultNumber("Maximum Pressure (PSI)", 120.0);
+    SmartDashboard.setDefaultNumber("MinPress", 0.0);
+    SmartDashboard.setDefaultNumber("MaxPress", 120.0);
   }
 
   public void extendPiston() {
@@ -58,46 +44,28 @@ public class PneumaticsSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
     /**
      * Get pressure from analog channel 0 and display on Shuffleboard.
      */
     SmartDashboard.putNumber("Pressure", m_ph.getPressure(0));
-
     /**
      * Get compressor running status and display on Shuffleboard.
      */
-    SmartDashboard.putBoolean("Compressor Running", m_ph.getCompressor());
+    SmartDashboard.putBoolean("CompRunning", m_ph.getCompressor());
 
-    // Enable Compressor Analog button
-    if (SmartDashboard.getBoolean("Enable Compressor Analog", false)) {
-      SmartDashboard.putBoolean("Enable Compressor Analog", false);
+    /**
+     * Enable the compressor with analog pressure sensor control.
+     *
+     * This uses hysteresis between a minimum and maximum pressure value,
+     * the compressor will run when the sensor reads below the minimum pressure
+     * value, and the compressor will shut off once it reaches the maximum.
+     */
+    // Get min and max pressure values from Shuffleboard
+    double minPressure = SmartDashboard.getNumber("MinPress", 0.0);
+    double maxPressure = SmartDashboard.getNumber("MaxPress", 0.0);
+    m_ph.enableCompressorAnalog(minPressure, maxPressure);
+    // m_ph.enableCompressorAnalog(100, 120);
 
-      // Get values from Shuffleboard
-      double minPressure = SmartDashboard.getNumber("Minimum Pressure (PSI)", 0.0);
-      double maxPressure = SmartDashboard.getNumber("Maximum Pressure (PSI)", 0.0);
-
-      /**
-       * Enable the compressor with analog pressure sensor control.
-       *
-       * This uses hysteresis between a minimum and maximum pressure value,
-       * the compressor will run when the sensor reads below the minimum pressure
-       * value, and the compressor will shut off once it reaches the maximum.
-       *
-       *
-       */
-      m_ph.enableCompressorAnalog(minPressure, maxPressure);
-    }
-
-    // Disable Compressor button
-    if (SmartDashboard.getBoolean("Disable Compressor", false)) {
-      SmartDashboard.putBoolean("Disable Compressor", false);
-
-      /**
-       * Disable the compressor.
-       */
-      m_ph.disableCompressor();
-    }
   }
 
 }
