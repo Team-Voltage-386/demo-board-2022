@@ -18,7 +18,7 @@ public class PneumaticsSubsystem extends SubsystemBase {
 
   // create an object so we can read the pressure from the pneumatics hub
   double current_pressure;
-  private static final int PH_CAN_ID = 1;
+  private static final int PH_CAN_ID = 2;
   PneumaticHub m_ph = new PneumaticHub(PH_CAN_ID);
 
   private final DoubleSolenoid sol = new DoubleSolenoid(
@@ -30,8 +30,8 @@ public class PneumaticsSubsystem extends SubsystemBase {
   public PneumaticsSubsystem() {
 
     // Add number inputs for minimum and maximum pressure
-    SmartDashboard.setDefaultNumber("MinPress", 0.0);
-    SmartDashboard.setDefaultNumber("MaxPress", 120.0);
+    // SmartDashboard.setDefaultNumber("MinPress", 0.0);
+    // SmartDashboard.setDefaultNumber("MaxPress", 120.0);
   }
 
   public void extendPiston() {
@@ -61,10 +61,10 @@ public class PneumaticsSubsystem extends SubsystemBase {
      * value, and the compressor will shut off once it reaches the maximum.
      */
     // Get min and max pressure values from Shuffleboard
-    double minPressure = SmartDashboard.getNumber("MinPress", 0.0);
-    double maxPressure = SmartDashboard.getNumber("MaxPress", 0.0);
-    m_ph.enableCompressorAnalog(minPressure, maxPressure);
-    // m_ph.enableCompressorAnalog(100, 120);
+    // double minPressure = SmartDashboard.getNumber("MinPress", 0.0);
+    // double maxPressure = SmartDashboard.getNumber("MaxPress", 0.0);
+    // m_ph.enableCompressorAnalog(minPressure, maxPressure);
+    m_ph.enableCompressorAnalog(115, 120);
 
   }
 
