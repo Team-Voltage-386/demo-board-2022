@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 // 76 lights on the strip --> set.length(76)
+// https://docs.wpilib.org/en/stable/docs/software/hardware-apis/misc/addressable-leds.html
 public class LEDSubsystem 
 {
     @Override
