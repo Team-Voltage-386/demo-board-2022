@@ -9,6 +9,31 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import frc.robot.subsystems.ColorRevSubsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import static frc.robot.Constants.ControllerConstants.*;
+
+import frc.robot.RobotContainer;
+
+
+
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import com.revrobotics.ColorMatchResult;
+import com.revrobotics.ColorMatch;
+import edu.wpi.first.wpilibj.util.Color;
+
+
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.ColorSensorV3;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -20,6 +45,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+  private ColorRevSubsystem m_colorRev;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -29,17 +55,17 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    AddressableLED m_led = new AddressableLED(2);
+    
 
     // Reuse buffer
     // Default to a length of 60, start empty output
     // Length is expensive to set, so only set it once, then just update data
-    AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(76);
-    m_led.setLength(m_ledBuffer.getLength());
+    
+    m_colorRev.getLED().setLength(m_colorRev.getBuffer().getLength());
 
     // Set the data
-    m_led.setData(m_ledBuffer);
-    m_led.start();
+    m_colorRev.getLED().setData(m_colorRev.getBuffer());
+    m_colorRev.getLED().start();
     m_robotContainer = new RobotContainer();
     
   }
