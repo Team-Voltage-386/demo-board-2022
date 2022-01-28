@@ -126,6 +126,12 @@ public class ColorRevSubsystem extends SubsystemBase {
     public boolean getRedOrBlue(){
         return redOrBlue;
     }
+    public AddressableLEDBuffer getBuffer(){
+        return m_ledBuffer;
+    }
+    public AddressableLED getLED(){
+        return m_led;
+    }
 
     public void rainbow() {
         // For every pixel
