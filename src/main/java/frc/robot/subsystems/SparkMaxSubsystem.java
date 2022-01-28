@@ -14,18 +14,21 @@ import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.CANSparkMax.ExternalFollower;
+
 
 public class SparkMaxSubsystem extends SubsystemBase {
   
   public final CANSparkMax m_DemoNeoBrushless = new CANSparkMax(Constants.MotorConstants.m_demoNeo,  MotorType.kBrushless);
 
   /** Creates a new ExampleSubsystem. */
-  public SparkMaxSubsystem() {}
+  public SparkMaxSubsystem() {
+    m_DemoNeoBrushless.restoreFactoryDefaults();
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // RobotContainer.m_joystick.getRawAxis(Constants.ControllerConstants.kVertical),
   }
 
   @Override

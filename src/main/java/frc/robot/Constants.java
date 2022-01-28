@@ -15,7 +15,7 @@ package frc.robot;
 public final class Constants {
 
     public static final class ControllerConstants {
-        public static final int kLeftVertical = 1;
+        public static final int kVertical = 1;
         public static final int kRightVertical = 5;
     }
 
