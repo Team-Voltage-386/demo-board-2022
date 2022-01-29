@@ -7,8 +7,7 @@ import static frc.robot.Constants.LedConstants.*;
 
 // 10 lights on the strip --> set.length(10)
 // https://docs.wpilib.org/en/stable/docs/software/hardware-apis/misc/addressable-leds.html
-public class LEDSubsystem extends SubsystemBase
-{
+public class LEDSubsystem extends SubsystemBase {
 
   // PWM port 9
   // Must be a PWM header, not MXP or DIO
@@ -20,7 +19,7 @@ public class LEDSubsystem extends SubsystemBase
   AddressableLEDBuffer ledBuffer = new AddressableLEDBuffer(kLedLength);
 
   /** Creates a new LEDSubsystem. */
-  public LEDSubsystem() {
+  public LEDSubsystem() { // main method
     // Set the data
     led.setLength(kLedLength);
     led.setData(ledBuffer);
@@ -37,23 +36,23 @@ public class LEDSubsystem extends SubsystemBase
 
   public void setRed(int index) {
 
-    ledBuffer.setRGB(index, 255, 0, 0);
+    ledBuffer.setRGB(index, 255, 0, 0); // red
   }
-    // @Override
-    // public void robotInit() {
-    
-  
-    //   }
+  // @Override
+  // public void robotInit() {
 
-    @Override
-    public void periodic() {
-      // This method will be called once per scheduler run
-      // Set the LEDs
-      led.setData(ledBuffer);
-    }
-  
-    @Override
-    public void simulationPeriodic() {
-      // This method will be called once per scheduler run during simulation
-    }
+  // }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+    // Set the LEDs
+    led.setData(ledBuffer);
+  }
+
+  @Override
+  public void simulationPeriodic() {
+    // This method will be called once per scheduler run during simulation
+  }
+
 }
