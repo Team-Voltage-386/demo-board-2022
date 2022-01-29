@@ -28,6 +28,7 @@ public class ColorRevSubsystem extends SubsystemBase {
     AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(76);
     int m_rainbowFirstPixelHue;
     AddressableLED m_led = new AddressableLED(2);
+    
     /*Creates Color Sensor Rev Subsystem*/
     I2C.Port demoSensorI2CPort = I2C.Port.kOnboard; // Port 0  
     /* sensor instantiations */
@@ -56,7 +57,7 @@ public class ColorRevSubsystem extends SubsystemBase {
          m_colorMatcher.addColorMatch(kBlueTarget);
          m_colorMatcher.addColorMatch(kRedTarget);
          m_colorMatcher.addColorMatch(kYellowTarget);
-
+         m_led.setLength(m_ledBuffer.getLength());
          m_DemoNeoBrushless.restoreFactoryDefaults();
     }
 

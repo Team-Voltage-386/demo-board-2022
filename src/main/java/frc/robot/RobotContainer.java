@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.ControllerConstants.*;
 import edu.wpi.first.wpilibj.util.Color;
-
+import frc.robot.commands.RevColorCommand;
 import frc.robot.RobotContainer;
 
 
@@ -52,9 +52,9 @@ public class RobotContainer {
 
   private final ColorMatch m_colorMatcher = new ColorMatch();
 
-  private final ColorRevSubsystem m_ColorRevSubSystem = new ColorRevSubsystem();
+  public final ColorRevSubsystem m_ColorRevSubSystem = new ColorRevSubsystem();
 
-
+  public final RevColorCommand m_RevColorCommand = new RevColorCommand(m_ColorRevSubSystem);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
