@@ -38,8 +38,6 @@ public class ColorRevSubsystem extends SubsystemBase {
     // Creates a Shuffleboard tab for the for Rev Color Detection
     private ShuffleboardTab tab = Shuffleboard.getTab("Ball Color");
 
-    public final CANSparkMax m_DemoNeoBrushless = new CANSparkMax(Constants.MotorConstants.m_demoNeo,  MotorType.kBrushless);
-
     // Create sensor widgets
     private NetworkTableEntry isBlueOrRedWidget = tab.add("Blue or Red", "Red").withPosition(7, 3).withSize(2, 1).getEntry();
     
@@ -58,7 +56,6 @@ public class ColorRevSubsystem extends SubsystemBase {
          m_colorMatcher.addColorMatch(kRedTarget);
          m_colorMatcher.addColorMatch(kYellowTarget);
          m_led.setLength(m_ledBuffer.getLength());
-         m_DemoNeoBrushless.restoreFactoryDefaults();
     }
 
     public String getDemoColorSenseRed() {
@@ -105,16 +102,19 @@ public class ColorRevSubsystem extends SubsystemBase {
     public void ColorDisplay(){
         if(isBall==false){
             rainbow();
+            System.out.println("No Ball");
         }else{
             if(redOrBlue==true){
                 for (var i = 0; i < m_ledBuffer.getLength(); i++) {
                     // Sets the specified LED to the RGB values for red
                     m_ledBuffer.setRGB(i, 255, 0, 0);
+                    System.out.println("Red Ball");
                 }  
             }else{
                 for (var i = 0; i < m_ledBuffer.getLength(); i++) {
                     // Sets the specified LED to the RGB values for red
                     m_ledBuffer.setRGB(i, 0, 0, 255);
+                    System.out.println("Blue Ball");
                 }
             }
         }
