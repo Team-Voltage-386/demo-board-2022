@@ -1,21 +1,59 @@
 package frc.robot.subsystems;
-// 76 lights on the strip --> set.length(76)
+
+import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import static frc.robot.Constants.LedConstants.*;
+
+// 10 lights on the strip --> set.length(10)
 // https://docs.wpilib.org/en/stable/docs/software/hardware-apis/misc/addressable-leds.html
-public class LEDSubsystem 
+public class LEDSubsystem extends SubsystemBase
 {
+
+  // PWM port 9
+  // Must be a PWM header, not MXP or DIO
+  AddressableLED led = new AddressableLED(kLedPort);
+
+  // Reuse buffer
+  // Default to a length of 10, start empty output
+  // Length is expensive to set, so only set it once, then just update data
+  AddressableLEDBuffer ledBuffer = new AddressableLEDBuffer(kLedLength);
+
+  /** Creates a new LEDSubsystem. */
+  public LEDSubsystem() {
+    // Set the data
+    led.setLength(kLedLength);
+    led.setData(ledBuffer);
+    led.start();
+
+    StaticRedStartLights();
+  }
+
+  public void StaticRedStartLights() {
+    for (int i = 0; i < kLedLength; i++) {
+      setRed(i);
+    }
+  }
+
+  public void setRed(int index) {
+
+    ledBuffer.setRGB(index, 255, 0, 0);
+  }
+    // @Override
+    // public void robotInit() {
+    
+  
+    //   }
+
     @Override
-    public void robotInit() {
-      // PWM port 2
-      // Must be a PWM header, not MXP or DIO
-      m_led = new AddressableLED(2);
+    public void periodic() {
+      // This method will be called once per scheduler run
+      // Set the LEDs
+      led.setData(ledBuffer);
+    }
   
-      // Reuse buffer
-      // Default to a length of 60, start empty output
-      // Length is expensive to set, so only set it once, then just update data
-      m_ledBuffer = new AddressableLEDBuffer(76);
-  
-      // Set the data
-      m_led.setData(m_ledBuffer);
-      m_led.start();
+    @Override
+    public void simulationPeriodic() {
+      // This method will be called once per scheduler run during simulation
     }
 }
