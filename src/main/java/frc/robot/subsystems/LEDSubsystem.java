@@ -31,7 +31,7 @@ public class LEDSubsystem extends SubsystemBase {
 
   public void StaticRedStartLights() {
     for (int i = 0; i < kLedLength; i++) {
-      setRed(i);
+      setMagenta(i);
     }
   }
 
@@ -41,19 +41,19 @@ public class LEDSubsystem extends SubsystemBase {
 
       switch (remainder) {
       case 0:
-        setYellow(i);
+        setLightPurple(i);
         break;
       case 1:
-        setGreen(i);
+        setLightPink(i);
         break;
       case 2:
-        setBlue(i);
+        setDarkTurquoise(i);
         break;
       case 3:
-        setPurple(i);
+        setShadow(i);
         break;
       case 4:
-        setRed(i);
+        setMagenta(i);
         break;
       default:
         setWhite(i);
@@ -63,9 +63,9 @@ public class LEDSubsystem extends SubsystemBase {
 
   }
 
-  public void setRed(int index) {
+  public void setMagenta(int index) {
 
-    ledBuffer.setRGB(index, 255, 0, 0); // red
+    ledBuffer.setRGB(index, 255, 0, 255); // Magenta
   }
   // @Override
   // public void robotInit() {
@@ -77,28 +77,28 @@ public class LEDSubsystem extends SubsystemBase {
     ledBuffer.setRGB(index, 255, 255, 255);
   }
 
-  // Set LED to Green Color (R=0, G=255, B=0)
-  public void setGreen(int index) {
-
-    ledBuffer.setRGB(index, 0, 255, 0);
-  }
-
-  // Set LED to Blue Color (R=0, G=0, B=255)
-  public void setBlue(int index) {
-
-    ledBuffer.setRGB(index, 0, 0, 255);
-  }
-
-  // Set LED to Purple Color (R=128, G=0, B=128)
-  public void setPurple(int index) {
-
-    ledBuffer.setRGB(index, 128, 0, 128);
-  }
-
-  // Set LED to Yellow Color (R=255, G=255, B=0)
-  public void setYellow(int index) {
+  // Set LED to Light Pink Color (R=255, G=182, B=193)
+  public void setLightPink(int index) {
 
     ledBuffer.setRGB(index, 255, 255, 0);
+  }
+
+  // Set LED to Dark Turquoise Color (R=0, G=206, B=209)
+  public void setDarkTurquoise(int index) {
+
+    ledBuffer.setRGB(index, 0, 206, 209);
+  }
+
+  // Set LED to Shadow Color (R=51, G=204, B=51)
+  public void setShadow(int index) {
+
+    ledBuffer.setRGB(index, 51, 204, 51);
+  }
+
+  // Set LED to Light Purple Color (R=135, G=66, B=245)
+  public void setLightPurple(int index) {
+
+    ledBuffer.setRGB(index, 135, 66, 245);
   }
 
   @Override
