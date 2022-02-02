@@ -23,11 +23,12 @@ import frc.robot.Constants;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import static frc.robot.Constants.LedConstants.*;
 
 public class ColorRevSubsystem extends SubsystemBase {
-    AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(76);
+    AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(10);
     int m_rainbowFirstPixelHue;
-    AddressableLED m_led = new AddressableLED(2);
+    AddressableLED m_led = new AddressableLED(9);
     
     /*Creates Color Sensor Rev Subsystem*/
     I2C.Port demoSensorI2CPort = I2C.Port.kOnboard; // Port 0  
@@ -56,6 +57,8 @@ public class ColorRevSubsystem extends SubsystemBase {
          m_colorMatcher.addColorMatch(kRedTarget);
          m_colorMatcher.addColorMatch(kYellowTarget);
          m_led.setLength(m_ledBuffer.getLength());
+         m_led.setData(m_ledBuffer);
+         m_led.start();
     }
 
     public String getDemoColorSenseRed() {
@@ -87,6 +90,7 @@ public class ColorRevSubsystem extends SubsystemBase {
             isBlueOrRedWidget.setString(getDemoColorSenseNull());
             isBall=false;
         }
+        ColorDisplay();
         /*System.out.println(isRedBall+ " " +isBlueBall);
        
         
@@ -101,19 +105,19 @@ public class ColorRevSubsystem extends SubsystemBase {
 
     public void ColorDisplay(){
         if(isBall==false){
-            rainbow();
+            StaticRainbowLights();
             System.out.println("No Ball");
         }else{
             if(redOrBlue==true){
                 for (var i = 0; i < m_ledBuffer.getLength(); i++) {
                     // Sets the specified LED to the RGB values for red
-                    m_ledBuffer.setRGB(i, 255, 0, 0);
+                    StaticRedStarLights();
                     System.out.println("Red Ball");
                 }  
             }else{
                 for (var i = 0; i < m_ledBuffer.getLength(); i++) {
                     // Sets the specified LED to the RGB values for red
-                    m_ledBuffer.setRGB(i, 0, 0, 255);
+                    StaticBlueStarLights();
                     System.out.println("Blue Ball");
                 }
             }
@@ -134,20 +138,36 @@ public class ColorRevSubsystem extends SubsystemBase {
         return m_led;
     }
 
-    public void rainbow() {
-        // For every pixel
-        for (var i = 0; i < m_ledBuffer.getLength(); i++) {
-          // Calculate the hue - hue is easier for rainbows because the color
-          // shape is a circle so only one value needs to precess
-          final var hue = (m_rainbowFirstPixelHue + (i * 180 / m_ledBuffer.getLength())) % 180;
-          // Set the value
-          m_ledBuffer.setHSV(i, hue, 255, 128);
-        }
-        // Increase by to make the rainbow "move"
-        m_rainbowFirstPixelHue += 3;
-        // Check bounds
-        m_rainbowFirstPixelHue %= 180;
-      }
+    // Rainbow Lights - not changing
+  public void StaticRainbowLights() {
+
+    int distance = 180 / kLedLength;
+
+    for (var i = 0; i < kLedLength; i++) {
+      m_ledBuffer.setHSV(i, i * distance, 255, 255);
+    }
+
+  }
+  public void setRed(int index) {
+
+    m_ledBuffer.setRGB(index, 0, 255, 0);
+  }
+  public void setBlue(int index) {
+
+    m_ledBuffer.setRGB(index, 0, 0, 255);
+  }
+  public void StaticRedStarLights() {
+
+    for (var i = 0; i < kLedLength; i++) {
+      setRed(i);
+    }
+  }
+  public void StaticBlueStarLights() {
+
+    for (var i = 0; i < kLedLength; i++) {
+      setBlue(i);
+    }
+  }
 
     @Override
     public void simulationPeriodic() {
