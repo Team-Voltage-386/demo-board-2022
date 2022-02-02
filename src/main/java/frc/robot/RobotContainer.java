@@ -44,17 +44,12 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private final SparkMaxSubsystem m_sparkMaxSubSystem = new SparkMaxSubsystem();
-
   public static final Joystick m_joystick = new Joystick(0);
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  private final ColorMatch m_colorMatcher = new ColorMatch();
-
   public final ColorRevSubsystem m_ColorRevSubSystem = new ColorRevSubsystem();
 
-  public final RevColorCommand m_RevColorCommand = new RevColorCommand(m_ColorRevSubSystem);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
