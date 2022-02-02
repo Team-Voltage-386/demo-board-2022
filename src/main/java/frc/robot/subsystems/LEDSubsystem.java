@@ -3,11 +3,15 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import static frc.robot.Constants.LedConstants.*;
+
 
 // using 10 lights on the strip (for now)--> set.length(10)
 // https://docs.wpilib.org/en/stable/docs/software/hardware-apis/misc/addressable-leds.html
 public class LEDSubsystem extends SubsystemBase {
+
+  private static final int kLedPort = 9;
+
+  private static final int kLedLength = 10;
 
   // PWM port 9
   // Must be a PWM header, not MXP or DIO
