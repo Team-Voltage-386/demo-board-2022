@@ -11,7 +11,7 @@ public class LEDSubsystem extends SubsystemBase {
 
   private static final int kLedPort = 9;
 
-  private static final int kLedLength = 10;
+  private static final int kLedLength = 76;
 
   // PWM port 9
   // Must be a PWM header, not MXP or DIO
