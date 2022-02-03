@@ -50,7 +50,7 @@ public class LEDSubsystem extends SubsystemBase {
         setDarkTurquoise(i);
         break;
       case 3:
-        setShadow(i);
+        setGreen(i);
         break;
       case 4:
         setMagenta(i);
@@ -89,8 +89,8 @@ public class LEDSubsystem extends SubsystemBase {
     ledBuffer.setRGB(index, 0, 206, 209);
   }
 
-  // Set LED to Shadow Color (R=51, G=204, B=51)
-  public void setShadow(int index) {
+  // Set LED to Green Color (R=51, G=204, B=51)
+  public void setGreen(int index) {
 
     ledBuffer.setRGB(index, 51, 204, 51);
   }
