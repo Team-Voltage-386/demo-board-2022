@@ -11,6 +11,7 @@ import frc.robot.commands.ButtonCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ButtonSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.LEDSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -23,6 +24,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ButtonSubsystem buttonSubsystem = new ButtonSubsystem();
+  private final LEDSubsystem ledSubsystem = new LEDSubsystem();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final ButtonCommand buttonCommand = new ButtonCommand(buttonSubsystem);
