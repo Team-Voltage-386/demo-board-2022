@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -17,12 +18,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 
 public class ButtonSubsystem extends SubsystemBase {
+  private static final int kLedPort = 9;
+
+  private static final int kLedLength = 76;
+
   /** Creates a new ButtonSubsystem. */
   private final ShuffleboardTab tab1 = Shuffleboard.getTab("Button");
 
   private TalonSRX motorConnector = new TalonSRX(2); 
 
-
+  private AddressableLED ledLights = new AddressableLED(kLedPort);
 
   private final NetworkTableEntry Pressed = tab1.add("Button Pressed", false)
   .withWidget("Boolean Box")

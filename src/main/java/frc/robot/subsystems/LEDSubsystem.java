@@ -18,12 +18,19 @@ public class LEDSubsystem extends SubsystemBase {
   // Length is expensive to set, so only set it once, then just update data
   AddressableLEDBuffer ledBuffer = new AddressableLEDBuffer(kLedLength);
 
+  // Temporary LED values used for rotating lights
+  AddressableLEDBuffer tempLedBuffer = new AddressableLEDBuffer(kLedLength);
+
   /** Creates a new LEDSubsystem. */
   public LEDSubsystem() { // main method
     // Set the data
     led.setLength(kLedLength);
     led.setData(ledBuffer);
     led.start();
+  }
+
+    // Counter to control how often the lights are updated.
+  private static int counter = 0;{
 
     StaticRedStartLights();
     FixedColorRainbow();
@@ -60,9 +67,36 @@ public class LEDSubsystem extends SubsystemBase {
         break;
       }
     }
-
   }
 
+  // Rotate Lights more slowly so the colors are visible.
+  public void ShootingStarShow() {
+
+    // Increment counter
+    counter++;
+
+    // This method will be called once per 25 calls
+    if ((counter % 25) == 0) {
+      RotateLights();
+    }
+  }
+// Rotate Lights
+public void RotateLights() {
+
+  // Arm 1 - first save the old values and then set the new values.
+  for (int i = 0; i < kLedLength; i++) {
+    ledBuffer.setLED(i, ledBuffer.getLED(i));
+  }
+  for (int i = 0; i < kLedLength; i++) {
+    if (i == 0) {
+      // Use the old value from index 4 as the new value for index 0
+      ledBuffer.setLED(i, ledBuffer.getLED(kLedLength));
+    } else {
+      // Shift the value from the index at i-1
+      ledBuffer.setLED(i, tempLedBuffer.getLED(i - 1));
+    }
+  }
+}
   public void setMagenta(int index) {
 
     ledBuffer.setRGB(index, 255, 0, 255); // Magenta
