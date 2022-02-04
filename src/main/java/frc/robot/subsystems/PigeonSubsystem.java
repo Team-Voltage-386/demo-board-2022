@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
+import edu.wpi.first.math.*;
 
 public class PigeonSubsystem extends SubsystemBase {
   /** Creates a new PigeonSubsystem. */
@@ -31,13 +32,24 @@ public class PigeonSubsystem extends SubsystemBase {
     // RemoteSensorSource senSource = RemoteSensorSource.Pigeon_Yaw;
   }
 
+  private double truncate(double num, int decimalplace) {
+    double n;
+    double power;
+
+    power = Math.pow(10, decimalplace);
+    n = Math.floor(num * power) / power;
+    return n;
+
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    int digitsPrecision = 2;
 
-    YawWidget.setDouble(pidgey.getYaw());
-    RollWidget.setDouble(pidgey.getRoll());
-    PitchWidget.setDouble(pidgey.getPitch());
+    YawWidget.setDouble(truncate(pidgey.getYaw(), digitsPrecision));
+    RollWidget.setDouble(truncate(pidgey.getRoll(), digitsPrecision));
+    PitchWidget.setDouble(truncate(pidgey.getPitch(), digitsPrecision));
 
   }
 }
