@@ -30,6 +30,8 @@ public class PigeonSubsystem extends SubsystemBase {
     pidgey = new WPI_PigeonIMU(kPigeonID);
     pidgey.configFactoryDefault();
     // RemoteSensorSource senSource = RemoteSensorSource.Pigeon_Yaw;
+    // org.teamvoltage.Logger.getInstance().addDataSource("Pigeon Yaw",
+    // pidgey::getYaw);
   }
 
   private double truncate(double num, int decimalplace) {
