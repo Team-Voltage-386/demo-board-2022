@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.PigeonSubsystem;
+import frc.robot.subsystems.LEDSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -26,7 +27,9 @@ public class RobotContainer {
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  private final PigeonSubsystem m_pigeonSubsystem = new PigeonSubsystem();
+  private final PigeonSubsystem pigeonSubsystem = new PigeonSubsystem();
+
+  private final LEDSubsystem ledSubsystem = new LEDSubsystem();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
