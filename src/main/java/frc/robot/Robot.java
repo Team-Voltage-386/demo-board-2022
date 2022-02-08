@@ -48,8 +48,7 @@ public class Robot extends TimedRobot {
     // periodic() methods. This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    // Write data to the log file
-    // org.teamvoltage.Logger.getInstance().saveLogs();
+
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

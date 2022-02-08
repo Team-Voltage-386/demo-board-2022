@@ -52,6 +52,8 @@ public class PigeonSubsystem extends SubsystemBase {
     YawWidget.setDouble(truncate(pidgey.getYaw(), digitsPrecision));
     RollWidget.setDouble(truncate(pidgey.getRoll(), digitsPrecision));
     PitchWidget.setDouble(truncate(pidgey.getPitch(), digitsPrecision));
-
+    // Write data to the log file
+    // org.teamvoltage.Logger.getInstance().saveLogs();
+    // System.out.println("saving");
   }
 }
