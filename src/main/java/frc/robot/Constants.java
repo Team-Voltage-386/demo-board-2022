@@ -26,6 +26,6 @@ public final class Constants {
     public static final class LedConstants{
 
         public static final int kLedPort = 1;  // PWM Port
-        public static final int kLedLength = 25; // Number of LEDs to control
+        public static final int kLedLength = 76; // Number of LEDs to control
     }
 }
