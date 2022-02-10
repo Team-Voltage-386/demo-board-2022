@@ -9,14 +9,28 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoSource;
 import edu.wpi.first.wpilibj.TimedRobot;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class USBCam extends SubsystemBase {
-  Thread m_visionThread;
+  private Thread m_visionThread;
+  private CvSource outputStream;
+  private CvSink cvSink;
+
+  // create shuffleboard tab
+  private ShuffleboardTab tab = Shuffleboard.getTab("USB Cam");
+  // camera widget
+  private ComplexWidget camWidget = tab.add(outputStream).withPosition(1, 1).withSize(2, 2);
 
   /** Creates a new USBCam. */
   public USBCam() {
@@ -24,8 +38,8 @@ public class USBCam extends SubsystemBase {
       UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
       camera.setResolution(640, 480);
 
-      CvSink cvSink = CameraServer.getInstance().getVideo();
-      CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
+      cvSink = CameraServer.getInstance().getVideo();
+      outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
 
       Mat source = new Mat();
       Mat output = new Mat();
@@ -44,5 +58,6 @@ public class USBCam extends SubsystemBase {
     // This method will be called once per scheduler run
     CameraServer.startAutomaticCapture();
 
+    camWidget.
   }
 }
