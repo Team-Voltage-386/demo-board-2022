@@ -18,9 +18,10 @@ public class ServoSubsystem extends SubsystemBase {
     }
 
     public void moveServobyAngle() {
-        double angle;
-       angle = maxAngle.getDouble(180);
-        //pass value from widget into set angle 
+        double angle; 
+       angle = maxAngle.getDouble(180); 
+        //pass entry value from widget into set angle 
+        // changed entry value into a double in order to call setAngle
         cameraServo.setAngle(angle);
     }
 
