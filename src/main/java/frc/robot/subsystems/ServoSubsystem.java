@@ -17,7 +17,7 @@ public class ServoSubsystem extends SubsystemBase {
     }
 
     public void moveServobyValue(double value) {
-        cameraServo.set(value)
+        cameraServo.set(value);
     }
 
     @Override
