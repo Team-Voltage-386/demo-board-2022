@@ -69,7 +69,7 @@ public class LEDSubsystem extends SubsystemBase {
 
   public void setRed(int index) {
 
-    ledBuffer.setRGB(index, 255, 0, 0); // red
+    ledBuffer.setRGB(index, 201, 14, 142); // pink
   }
   // @Override
   // public void robotInit() {
@@ -78,31 +78,31 @@ public class LEDSubsystem extends SubsystemBase {
   // Set LED to White Color (R=255, G=255, B=255)
   public void setWhite(int index) {
 
-    ledBuffer.setRGB(index, 255, 255, 255);
+    ledBuffer.setRGB(index, 99, 21, 235); //purple
   }
 
   // Set LED to Green Color (R=0, G=255, B=0)
   public void setGreen(int index) {
 
-    ledBuffer.setRGB(index, 0, 255, 0);
+    ledBuffer.setRGB(index, 14, 235, 25); //lime green
   }
 
   // Set LED to Blue Color (R=0, G=0, B=255)
   public void setBlue(int index) {
 
-    ledBuffer.setRGB(index, 0, 0, 255);
+    ledBuffer.setRGB(index, 6, 14, 92); //dark blue
   }
 
   // Set LED to Purple Color (R=128, G=0, B=128)
   public void setPurple(int index) {
 
-    ledBuffer.setRGB(index, 128, 0, 128);
+    ledBuffer.setRGB(index, 21, 235, 203); // light blue
   }
 
   // Set LED to Yellow Color (R=255, G=255, B=0)
   public void setYellow(int index) {
 
-    ledBuffer.setRGB(index, 255, 255, 0);
+    ledBuffer.setRGB(index, 255, 234, 0); //yellow
   }
 
   @Override
