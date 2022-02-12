@@ -29,29 +29,29 @@ public class ButtonSubsystem extends SubsystemBase {
 
   private AddressableLED ledLights = new AddressableLED(kLedPort);
 
-  private final NetworkTableEntry Pressed = tab1.add("Button Pressed", false)
-  .withWidget("Boolean Box")
-  .withProperties(Map.of("colorWhenTrue", "Green", "colorWhenFalse", "Red"))
-  .withPosition(0,0)
-  .getEntry();
+  // private final NetworkTableEntry Pressed = tab1.add("Button Pressed", false)
+  // .withWidget("Boolean Box")
+  // .withProperties(Map.of("colorWhenTrue", "Green", "colorWhenFalse", "Red"))
+  // .withPosition(0,0)
+  // .getEntry();
 
   private boolean buttonPress = false;
 
   public ButtonSubsystem() {}
 
   public void Flash(boolean pressed){
-    if(pressed){
-      buttonPress=true;
-    }
-    else{
-      buttonPress=false;
-    }
-    if(buttonPress){
-      Pressed.setBoolean(true);
-    }
-    else{
-      Pressed.setBoolean(false);
-    }
+    // if(pressed){
+    //   buttonPress=true;
+    // }
+    // else{
+    //   buttonPress=false;
+    // }
+    // if(buttonPress){
+    //   Pressed.setBoolean(true);
+    // }
+    // else{
+    //   Pressed.setBoolean(false);
+    // }
   }
 
   @Override
