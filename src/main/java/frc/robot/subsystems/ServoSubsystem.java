@@ -9,9 +9,17 @@ public class ServoSubsystem extends SubsystemBase {
 
 
     public ServoSubsystem() {
-        cameraServo.set(0);
-        cameraServo.setAngle(75);
+       
     }
+
+    public void moveServobyAngle(double angle) {
+        cameraServo.setAngle(angle);
+    }
+
+    public void moveServobyValue(double value) {
+        cameraServo.set(value)
+    }
+
     @Override
     public void periodic() {
     // This method will be called once per scheduler run
