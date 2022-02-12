@@ -77,7 +77,7 @@ public class LEDSubsystem extends SubsystemBase {
     public void StaticRedStarLights(int ballCount, boolean fbb) {
         if(ballCount==0){
             for (var i = kLedLength/2; i < kLedLength; i++) {
-            setRed(i);
+                setRed(i);
             }
             m_led.setData(m_ledBuffer);
             int distance = 180 / (kLedLength/2);

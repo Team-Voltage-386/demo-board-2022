@@ -33,6 +33,9 @@ public class ColorRevSubsystem extends SubsystemBase {
     private NetworkTableEntry isBlueOrRedWidget = tab.add("Blue or Red", "Red").withPosition(7, 3).withSize(2, 1).getEntry();
     
     //intializes Colors
+    //green rgb 143, 59, 29
+    //yellow rgb 50, 143, 61
+    private final Color kGreenYellowInBetweenTarget = new Color(((143+50)/2)/255, ((59+143)/2)/255, ((29+61)/2)/255);
     private final Color kBlueTarget = new Color(0.143, 0.427, 0.429);
     private final Color kRedTarget = new Color(0.361, 0.524, 0.113);
     private final Color kGreenTarget = new  Color(0.561, 0.232, 0.114);
@@ -44,7 +47,7 @@ public class ColorRevSubsystem extends SubsystemBase {
     private int ballCountRed=0;
     private int ballCountBlue=0;
     private boolean firstBallBlue;
-    private boolean onFirst;
+    //private boolean onFirst;
 
     
     // constructs LED and ColorMatcher
@@ -52,7 +55,11 @@ public class ColorRevSubsystem extends SubsystemBase {
          m_colorMatcher.addColorMatch(kBlueTarget);
          m_colorMatcher.addColorMatch(kRedTarget);
          m_colorMatcher.addColorMatch(kYellowTarget);
-         m_colorMatcher.addColorMatch(kGreenTarget);
+         m_colorMatcher.addColorMatch(kGreenYellowInBetweenTarget);
+         ballCount=0;
+         ballCountRed=0;
+         ballCountBlue=0;
+         m_timer.start();
     }
     //widget get methods
     public String getDemoColorSenseRed() {
@@ -75,14 +82,12 @@ public class ColorRevSubsystem extends SubsystemBase {
         ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
         if (match.color == kBlueTarget) {
             isBlueOrRedWidget.setString(getDemoColorSenseBlue());
-            
-            
             if(ballCount<2){
                 ballCount++;
                 isBall=true;
                 redOrBlue=false;
                 if(ballCount==0){
-                    onFirst=true;
+                    //onFirst=true;
                     firstBallBlue=true;
                 }
             }
@@ -90,30 +95,38 @@ public class ColorRevSubsystem extends SubsystemBase {
             isBlueOrRedWidget.setString(getDemoColorSenseRed());
             if(ballCount<2){
                 ballCount++;
-                redOrBlue=false;
+                redOrBlue=true;
                 isBall=true;
                 if(ballCount==0){
-                    onFirst=true;
+                    //onFirst=true;
                     firstBallBlue=false;
                 }
             }
             
             
-        }else if (match.color == kYellowTarget) {
+        }else if (match.color == kGreenYellowInBetweenTarget) {
             isBlueOrRedWidget.setString(getDemoColorSenseNull());
             isBall=false;
         }
         
         //call to method after booleans updated 
         ColorDisplay();
+        if(shoot==true){
+            m_timer.reset();
+        }
         shoot=false;
-        onFirst=false;
+        //onFirst=false;
     }    
     //LED update Method
     public void ColorDisplay(){
-        if(shoot=true){
+        if(shoot==true){
             ballCount--;
             m_LEDSubsystem.StaticRainbowLights(ballCount, redOrBlue);
+            if(firstBallBlue==true){
+                ballCountBlue--;
+            }else{
+                ballCountRed--;
+            }
         } else
         if(isBall==false){
             
