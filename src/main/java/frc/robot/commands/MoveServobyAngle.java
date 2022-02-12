@@ -20,7 +20,7 @@ public class MoveServobyAngle extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.moveServobyAngle(75);
+    m_subsystem.moveServobyAngle();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

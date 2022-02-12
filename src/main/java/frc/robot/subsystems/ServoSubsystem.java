@@ -10,15 +10,17 @@ import frc.robot.RobotContainer;
 public class ServoSubsystem extends SubsystemBase {
     Servo cameraServo = new Servo(8); // servo is wired to port #8
     private final ShuffleboardTab tab2 = Shuffleboard.getTab("Servo");
-    // private NetworkTableEntry maxAngle = tab2.add("Max Angle",
-    // 180).withPosition(0,0).withSize(0, 0)
-    // .getEntry();
+    private NetworkTableEntry maxAngle = tab2.add("Max Angle",
+            180).withPosition(0, 0).withSize(0, 0).getEntry();
 
     public ServoSubsystem() {
 
     }
 
-    public void moveServobyAngle(double angle) {
+    public void moveServobyAngle() {
+        double angle;
+       angle = maxAngle.getDouble(180);
+        //pass value from widget into set angle 
         cameraServo.setAngle(angle);
     }
 
