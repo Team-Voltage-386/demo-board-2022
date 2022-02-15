@@ -2,8 +2,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 
 // using 10 lights on the strip (for now)--> set.length(10)
 // https://docs.wpilib.org/en/stable/docs/software/hardware-apis/misc/addressable-leds.html
@@ -39,31 +39,43 @@ public class LEDSubsystem extends SubsystemBase {
     }
   }
 
-  public void FixedColorRainbow() { //not sure if this works yet because we did not get a chance to deploy
+  public void FixedColorRainbow() { // not sure if this works yet because we did not get a chance to deploy
     for (var i = 0; i < kLedLength; i++) {
       int remainder = i % 5;
 
       switch (remainder) {
-      case 0:
-        setYellow(i);
-        break;
-      case 1:
-        setGreen(i);
-        break;
-      case 2:
-        setBlue(i);
-        break;
-      case 3:
-        setPurple(i);
-        break;
-      case 4:
-        setRed(i);
-        break;
-      default:
-        setWhite(i);
-        break;
+        case 0:
+          setYellow(i);
+          break;
+        case 1:
+          setGreen(i);
+          break;
+        case 2:
+          setBlue(i);
+          break;
+        case 3:
+          setPurple(i);
+          break;
+        case 4:
+          setRed(i);
+          break;
+        default:
+          setWhite(i);
+          break;
       }
     }
+
+  }
+
+  /**
+   * shifts the LED lights by 1
+   */
+  public void MoveLights() {
+    Color initialColor = ledBuffer.getLED(0);
+    for (var i = 0; i < kLedLength - 1; i++) {
+      ledBuffer.setLED(i, ledBuffer.getLED(i + 1));
+    }
+    ledBuffer.setLED(kLedLength - 1, initialColor);
 
   }
 
