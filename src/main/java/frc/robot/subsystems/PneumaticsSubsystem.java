@@ -22,7 +22,7 @@ public class PneumaticsSubsystem extends SubsystemBase {
   PneumaticHub m_ph = new PneumaticHub(PH_CAN_ID);
 
   private final DoubleSolenoid sol = new DoubleSolenoid(
-      PneumaticsModuleType.REVPH,
+      PneumaticsModuleType.CTREPCM,
       Constants.kForwardChannel,
       Constants.kReverseChannel);
 
