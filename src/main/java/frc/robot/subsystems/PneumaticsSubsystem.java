@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import javax.lang.model.util.ElementScanner6;
+
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -13,7 +15,9 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticHub;
+import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class PneumaticsSubsystem extends SubsystemBase {
 
@@ -23,12 +27,11 @@ public class PneumaticsSubsystem extends SubsystemBase {
   AnalogInput pressureSensor = new AnalogInput(Constants.AnalogPressureChannel);
 
   private static final int PH_CAN_ID = 2;
-  PneumaticHub m_ph = new PneumaticHub(PH_CAN_ID);
+  PneumaticsControlModule m_ph = new PneumaticsControlModule(PH_CAN_ID);
 
   // define the solenoid
-  private final DoubleSolenoid sol = new DoubleSolenoid(
-      PneumaticsModuleType.CTREPCM,
-      Constants.kForwardChannel,
+
+  private DoubleSolenoid sol = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.kForwardChannel,
       Constants.kReverseChannel);
 
   /** Creates a new PneumaticsSubsystem. */
@@ -54,11 +57,15 @@ public class PneumaticsSubsystem extends SubsystemBase {
     // display calculated pressure
     current_pressure = 250 * (current_voltage / 5) - 25;
     SmartDashboard.putNumber("Pessure", current_pressure);
-    /**
-     * Get compressor running status and display on Shuffleboard.
-     * Does this work for CTRE pneumatics hub?
-     */
-    // SmartDashboard.putBoolean("CompRunning", m_ph.getCompressor());
+
+    if (sol.get() == Value.kForward)
+      SmartDashboard.putString("SolState", "kForward");
+    else if (sol.get() == Value.kReverse)
+      SmartDashboard.putString("SolState", "kReverse");
+    else if (sol.get() == Value.kOff)
+      SmartDashboard.putString("SolState", "kOff");
+    else
+      SmartDashboard.putString("SolState", "unknown");
 
   }
 
