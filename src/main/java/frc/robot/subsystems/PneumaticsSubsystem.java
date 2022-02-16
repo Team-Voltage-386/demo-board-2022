@@ -10,17 +10,22 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 public class PneumaticsSubsystem extends SubsystemBase {
 
-  // create an object so we can read the pressure from the pneumatics hub
+  // variables for reading current pressure
   double current_pressure;
+  double current_voltage;
+  AnalogInput pressureSensor = new AnalogInput(Constants.AnalogPressureChannel);
+
   private static final int PH_CAN_ID = 2;
   PneumaticHub m_ph = new PneumaticHub(PH_CAN_ID);
 
+  // define the solenoid
   private final DoubleSolenoid sol = new DoubleSolenoid(
       PneumaticsModuleType.CTREPCM,
       Constants.kForwardChannel,
@@ -29,9 +34,6 @@ public class PneumaticsSubsystem extends SubsystemBase {
   /** Creates a new PneumaticsSubsystem. */
   public PneumaticsSubsystem() {
 
-    // Add number inputs for minimum and maximum pressure
-    SmartDashboard.setDefaultNumber("MinPress", 0.0);
-    SmartDashboard.setDefaultNumber("MaxPress", 120.0);
   }
 
   public void extendPiston() {
@@ -44,27 +46,19 @@ public class PneumaticsSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    /**
-     * Get pressure from analog channel 0 and display on Shuffleboard.
-     */
-    SmartDashboard.putNumber("Pressure", m_ph.getPressure(0));
+    // display voltage from the pressure sensor
+    current_voltage = pressureSensor.getVoltage();
+    SmartDashboard.putNumber("Voltage", current_voltage);
+
+    // According to Rev documentation pressure = 250 (voltageOut/voltageSupply)-25
+    // display calculated pressure
+    current_pressure = 250 * (current_voltage / 5) - 25;
+    SmartDashboard.putNumber("Pessure", current_pressure);
     /**
      * Get compressor running status and display on Shuffleboard.
+     * Does this work for CTRE pneumatics hub?
      */
-    SmartDashboard.putBoolean("CompRunning", m_ph.getCompressor());
-
-    /**
-     * Enable the compressor with analog pressure sensor control.
-     *
-     * This uses hysteresis between a minimum and maximum pressure value,
-     * the compressor will run when the sensor reads below the minimum pressure
-     * value, and the compressor will shut off once it reaches the maximum.
-     */
-    // Get min and max pressure values from Shuffleboard
-    double minPressure = SmartDashboard.getNumber("MinPress", 0.0);
-    double maxPressure = SmartDashboard.getNumber("MaxPress", 0.0);
-    m_ph.enableCompressorAnalog(minPressure, maxPressure);
-    // m_ph.enableCompressorAnalog(115, 120);
+    // SmartDashboard.putBoolean("CompRunning", m_ph.getCompressor());
 
   }
 

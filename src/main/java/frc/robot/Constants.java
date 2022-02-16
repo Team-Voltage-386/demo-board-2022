@@ -46,4 +46,5 @@ public final class Constants {
     public static final int kReverseChannel = 3; // PCM
     public static final DoubleSolenoid.Value kPistonOut = DoubleSolenoid.Value.kForward;
     public static final DoubleSolenoid.Value kPistonIn = DoubleSolenoid.Value.kReverse;
+    public static final int AnalogPressureChannel = 2; // analog input on Rio
 }
