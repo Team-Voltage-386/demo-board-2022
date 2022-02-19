@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ButtonCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.MoveLightsCommand;
+import frc.robot.commands.AllBlueCommand;
 import frc.robot.subsystems.ButtonSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
@@ -63,10 +64,12 @@ public class RobotContainer {
   private void configureButtonBindings() { // Create the controller button objects
 
     JoystickButton Rbumper = new JoystickButton(controller, Constants.ControllerConstants.kRightBumper);
+    JoystickButton Lbumper = new JoystickButton(controller, Constants.ControllerConstants.kLeftBumper);
 
     // Connect the buttons to commands
 
     Rbumper.whenPressed(new MoveLightsCommand(ledSubsystem));
+    Lbumper.whenPressed(new AllBlueCommand(ledSubsystem));
 
   }
 

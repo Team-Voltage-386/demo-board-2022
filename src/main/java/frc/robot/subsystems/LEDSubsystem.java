@@ -79,6 +79,16 @@ public class LEDSubsystem extends SubsystemBase {
 
   }
 
+  public void AllBlue() {
+    // for (int i = 0; i < 10; i++)
+    // setBlue(i);
+    // for (int j = 10; j < 19; j++)
+    // setRed(j);
+    for (int i = 0; i < kLedLength; i++) {
+      setBlue(i);
+    }
+  }
+
   public void setRed(int index) {
 
     ledBuffer.setRGB(index, 255, 0, 0); // red
