@@ -29,7 +29,7 @@ public class LEDSubsystem extends SubsystemBase {
     led.setData(ledBuffer);
     led.start();
 
-    StaticRedStartLights();
+    // initialize the LEDs to a rainbow when system initializes
     FixedColorRainbow();
   }
 
@@ -90,10 +90,7 @@ public class LEDSubsystem extends SubsystemBase {
 
     ledBuffer.setRGB(index, 255, 0, 0); // red
   }
-  // @Override
-  // public void robotInit() {
 
-  // }
   // Set LED to White Color (R=255, G=255, B=255)
   public void setWhite(int index) {
 

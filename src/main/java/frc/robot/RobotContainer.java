@@ -74,6 +74,16 @@ public class RobotContainer {
         Constants.ControllerConstants.kLeftBumper).whenPressed(
             new InstantCommand(ledSubsystem::HalfBlueRed,
                 ledSubsystem));
+
+    new JoystickButton(controller,
+        Constants.ControllerConstants.kA).whenPressed(
+            new InstantCommand(ledSubsystem::FixedColorRainbow,
+                ledSubsystem));
+
+    new JoystickButton(controller,
+        Constants.ControllerConstants.kB).whenPressed(
+            new InstantCommand(ledSubsystem::StaticRedStartLights,
+                ledSubsystem));
   }
 
   /**
