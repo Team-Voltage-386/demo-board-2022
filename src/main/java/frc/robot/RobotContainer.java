@@ -66,7 +66,7 @@ public class RobotContainer {
     // Instant commands to call methods in the LED subsystem
 
     new JoystickButton(controller,
-        Constants.ControllerConstants.kRightBumper).whenPressed(
+        Constants.ControllerConstants.kRightBumper).whileHeld(
             new InstantCommand(ledSubsystem::MoveLights,
                 ledSubsystem));
 
@@ -82,7 +82,12 @@ public class RobotContainer {
 
     new JoystickButton(controller,
         Constants.ControllerConstants.kB).whenPressed(
-            new InstantCommand(ledSubsystem::StaticRedStartLights,
+            new InstantCommand(ledSubsystem::AllRed,
+                ledSubsystem));
+
+    new JoystickButton(controller,
+        Constants.ControllerConstants.kX).whenPressed(
+            new InstantCommand(ledSubsystem::AllOff,
                 ledSubsystem));
   }
 

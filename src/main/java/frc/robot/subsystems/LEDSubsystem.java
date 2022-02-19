@@ -33,10 +33,22 @@ public class LEDSubsystem extends SubsystemBase {
     FixedColorRainbow();
   }
 
-  public void StaticRedStartLights() {
+  public void AllRed() {
     for (int i = 0; i < kLedLength; i++) {
       setRed(i);
     }
+  }
+
+  // Turn all the LEDs off
+  public void AllOff() {
+    for (int i = 0; i < kLedLength; i++)
+      turnOff(i);
+  }
+
+  // Turn all the LEDs yellow at 1/3 intensity
+  public void AllYellow() {
+    for (int i = 0; i < kLedLength; i++)
+      setYellow(i);
   }
 
   public void FixedColorRainbow() { // not sure if this works yet because we did not get a chance to deploy
@@ -82,7 +94,7 @@ public class LEDSubsystem extends SubsystemBase {
   public void HalfBlueRed() {
     for (int i = 0; i < kLedLength / 2 - 1; i++)
       setBlue(i);
-    for (int j = kLedLength / 2; j < kLedLength - 1; j++)
+    for (int j = kLedLength / 2; j < kLedLength; j++)
       setRed(j);
   }
 
@@ -115,10 +127,17 @@ public class LEDSubsystem extends SubsystemBase {
     ledBuffer.setRGB(index, 128, 0, 128);
   }
 
-  // Set LED to Yellow Color (R=255, G=255, B=0)
+  // Set LED to Yellow Color (R=128, G=128, B=0)
+  // half intensity uses the same power at full red or blue
   public void setYellow(int index) {
 
-    ledBuffer.setRGB(index, 255, 255, 0);
+    ledBuffer.setRGB(index, 128, 128, 0);
+  }
+
+  // Set LEDs off (R=0, G=0, B=0)
+  public void turnOff(int index) {
+
+    ledBuffer.setRGB(index, 0, 0, 0);
   }
 
   @Override
